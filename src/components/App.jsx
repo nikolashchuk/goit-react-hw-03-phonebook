@@ -24,7 +24,6 @@ export class App extends Component {
       this.setState({ contacts: parsedContacts });
       return;
     }
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
   }
 
   componentDidUpdate(_, prevState) {
