@@ -17,6 +17,22 @@ export class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+      return;
+    }
+    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  }
+
+  componentDidUpdate(_, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = (newName, number) => {
     const uniqueName = this.state.contacts.some(({ name }) => name === newName);
 
